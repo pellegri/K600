@@ -81,7 +81,7 @@ fParticleGun(0)
     //fParticleGun->SetParticleEnergy(0.*MeV);
     //fParticleGun->SetParticleEnergy(0.100*MeV);
     //fParticleGun->SetParticleEnergy(1.332*MeV);
-    fParticleGun->SetParticleEnergy(82.0*keV);
+    fParticleGun->SetParticleEnergy(4.0*MeV);
     
     //fParticleGun->SetParticleEnergy(200.*MeV);
     //fParticleGun->SetParticleEnergy(22.5*MeV);
@@ -176,7 +176,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     */
     
     ///////////////////////////////////////////////////////////
-    //       Initial Position Distribution of Particle
+    //       Initial Momentum Direction Distribution of Particle
     ///////////////////////////////////////////////////////////
     
     G4double theta = 2*M_PI*G4UniformRand();
@@ -195,13 +195,13 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //       Initial Energy Distribution of Particle
     ///////////////////////////////////////////////////
 
-    //G4double InitialEnergy = G4RandGauss::shoot(((12.049-7.16192)*(0.75)), 0.012);
+    G4double InitialEnergy = G4RandGauss::shoot(4.0, 0.1);
     //G4double InitialEnergy = ((12.049-7.16192)*(0.75)); // MeV
     
     //  Empirical
     //G4double InitialEnergy = G4RandGauss::shoot(2.96058e+00, ((1.5e-3)/2.3548));
     
-    //fParticleGun->SetParticleEnergy(InitialEnergy*MeV);
+    fParticleGun->SetParticleEnergy(InitialEnergy*MeV);
 
     
     ////////////////////////

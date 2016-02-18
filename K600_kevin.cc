@@ -83,7 +83,6 @@ int main(int argc,char** argv)
 #ifdef G4MULTITHREADED
     G4int nThreads = 0;
 #endif
-  /*
     for ( G4int i=1; i<argc; i=i+2 ) {
         if      ( G4String(argv[i]) == "-m" ) macro = argv[i+1];
         else if ( G4String(argv[i]) == "-u" ) session = argv[i+1];
@@ -97,7 +96,7 @@ int main(int argc,char** argv)
             return 1;
         }
     }
-    */
+    
     
     
     // Choose the Random engine
@@ -140,7 +139,6 @@ int main(int argc,char** argv)
     
     G4PhysListFactory factory;
     G4VModularPhysicsList* phys = 0;
-    //G4String physName = "QGSP_BERT";
     G4String physName = "QGSP_BERT";
     // reference PhysicsList via its name
     phys = factory.GetReferencePhysList(physName);

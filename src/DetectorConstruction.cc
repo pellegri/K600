@@ -1,3 +1,4 @@
+
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -280,7 +281,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     ////    CLOVER SETUP
     
     CLOVER_AllPresent_Override = false;
-    CLOVER_AllAbsent_Override = true;
+    CLOVER_AllAbsent_Override = false;
     
     CLOVER_Shield_AllPresent_Override = false;
     CLOVER_Shield_AllAbsent_Override = true;
@@ -288,7 +289,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //  CLOVER 1
     CLOVER_Presence[0] = true;
-    CLOVER_Shield_Presence[0] = true;
+    CLOVER_Shield_Presence[0] = false;
     CLOVER_Distance[0] = 10*cm;
     CLOVER_phi[0] = 90*deg;
     CLOVER_theta[0] = 135*deg;
@@ -296,7 +297,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //  CLOVER 2
     CLOVER_Presence[1] = true;
-    CLOVER_Shield_Presence[1] = true;
+    CLOVER_Shield_Presence[1] = false;
     CLOVER_Distance[1] = 10*cm;
     CLOVER_phi[1] = 0*deg;
     CLOVER_theta[1] = 135*deg;
@@ -304,7 +305,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //  CLOVER 3
     CLOVER_Presence[2] = true;
-    CLOVER_Shield_Presence[2] = true;
+    CLOVER_Shield_Presence[2] = false;
     CLOVER_Distance[2] = 10*cm;
     CLOVER_phi[2] = 270*deg;
     CLOVER_theta[2] = 135*deg;
@@ -312,7 +313,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //  CLOVER 4
     CLOVER_Presence[3] = true;
-    CLOVER_Shield_Presence[3] = true;
+    CLOVER_Shield_Presence[3] = false;
     CLOVER_Distance[3] = 10*cm;
     CLOVER_phi[3] = 180*deg;
     CLOVER_theta[3] = 135*deg;
@@ -320,8 +321,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //  CLOVER 5
     CLOVER_Presence[4] = true;
-    CLOVER_Shield_Presence[4] = true;
-    CLOVER_Distance[4] = 10*cm;
+    CLOVER_Shield_Presence[4] = false;
+    CLOVER_Distance[4] = 100*cm;
     CLOVER_phi[4] = 45*deg;
     CLOVER_theta[4] = 90*deg;
     CLOVER_rotm[4].rotateY(90.0 *deg);
@@ -329,24 +330,24 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //  CLOVER 6
     CLOVER_Presence[5] = true;
-    CLOVER_Shield_Presence[5] = true;
-    CLOVER_Distance[5] = 10*cm;
+    CLOVER_Shield_Presence[5] = false;
+    CLOVER_Distance[5] = 100*cm;
     CLOVER_phi[5] = 0*deg;
     CLOVER_theta[5] = 90*deg;
     CLOVER_rotm[5].rotateY(-90.0 *deg);
     
     //  CLOVER 7
     CLOVER_Presence[6] = true;
-    CLOVER_Shield_Presence[6] = true;
-    CLOVER_Distance[6] = 10*cm;
+    CLOVER_Shield_Presence[6] = false;
+    CLOVER_Distance[6] = 100*cm;
     CLOVER_phi[6] = 180*deg;
     CLOVER_theta[6] = 90*deg;
     CLOVER_rotm[6].rotateY(90.0 *deg);
     
     //  CLOVER 8
     CLOVER_Presence[7] = true;
-    CLOVER_Shield_Presence[7] = true;
-    CLOVER_Distance[7] = 10*cm;
+    CLOVER_Shield_Presence[7] = false;
+    CLOVER_Distance[7] = 100*cm;
     CLOVER_phi[7] = 135*deg;
     CLOVER_theta[7] = 90*deg;
     CLOVER_rotm[7].rotateY(90.0 *deg);
@@ -354,8 +355,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     
     //  CLOVER 9
-    CLOVER_Presence[8] = true;
-    CLOVER_Shield_Presence[8] = true;
+    CLOVER_Presence[8] = false;
+    CLOVER_Shield_Presence[8] = false;
     CLOVER_Distance[8] = 10*cm;
     CLOVER_phi[8] = -45*deg;
     CLOVER_theta[8] = 90*deg;
@@ -380,53 +381,66 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     ////        LEPS SETUP
     
     LEPS_AllPresent_Override = false;
-    LEPS_AllAbsent_Override = false;
+    LEPS_AllAbsent_Override = true;
     
     
     //  LEPS 1
-    LEPS_Presence[0] = true;
-    LEPS_Distance[0] = 4.5*cm;
-    LEPS_phi[0] = 0.*deg;
-    LEPS_theta[0] = 0.*deg;
-    LEPS_rotm[0].rotateX(180.*deg);
+    LEPS_Presence[0] = false;
+    LEPS_Distance[0] = 20*cm;
+    LEPS_phi[0] = 90.*deg;
+    LEPS_theta[0] = 135.*deg;
+    LEPS_rotm[0].rotateX(45.*deg);
     
     //  LEPS 2
-    LEPS_Presence[1] = true;
-    LEPS_Distance[1] = 4.5*cm;
+    LEPS_Presence[1] = false;
+    LEPS_Distance[1] = 14.5*cm;
     LEPS_phi[1] = 0.*deg;
-    LEPS_theta[1] = 90.*deg;
-    LEPS_rotm[1].rotateY(-90.*deg);
+    LEPS_theta[1] = 135.*deg;
+    LEPS_rotm[1].rotateY(-45.*deg);
     
     //  LEPS 3
     LEPS_Presence[2] = false;
-    LEPS_Distance[2] = 4.5*cm;
-    LEPS_phi[2] = 90.*deg;
-    LEPS_theta[2] = 90.*deg;
-    LEPS_rotm[2].rotateX(90.*deg);
+    LEPS_Distance[2] = 20*cm;
+    LEPS_phi[2] = 270.*deg;
+    LEPS_theta[2] = 135.*deg;
+    LEPS_rotm[2].rotateX(-45.*deg);
     
     //  LEPS 4
     LEPS_Presence[3] = false;
-    LEPS_Distance[3] = 4.5*cm;
+    LEPS_Distance[3] = 14.5*cm;
     LEPS_phi[3] = 180.*deg;
-    LEPS_theta[3] = 90*deg;
-    LEPS_rotm[3].rotateY(90.*deg);
+    LEPS_theta[3] = 135*deg;
+    LEPS_rotm[3].rotateY(45.*deg);
     
     //  LEPS 5
     LEPS_Presence[4] = false;
-    LEPS_Distance[4] = 4.5*cm;
-    LEPS_phi[4] = 270.*deg;
+    LEPS_Distance[4] = 14.5*cm;
+    LEPS_phi[4] = 45*deg;
     LEPS_theta[4] = 90*deg;
-    LEPS_rotm[4].rotateX(-90.*deg);
-    
+    LEPS_rotm[4].rotateY(90.0 *deg);
+    LEPS_rotm[4].rotateZ(-135.0 *deg);
     
     //  LEPS 6
     LEPS_Presence[5] = false;
-    LEPS_Distance[5] = 4.5*cm;
+    LEPS_Distance[5] = 14.5*cm;
     LEPS_phi[5] = 0*deg;
-    LEPS_theta[5] = 180*deg;
-    LEPS_rotm[5].rotateY(0.*deg);
+    LEPS_theta[5] = 90*deg;
+    LEPS_rotm[5].rotateY(-90.*deg);
     
+    //  LEPS 7
+    LEPS_Presence[6] = true;
+    LEPS_Distance[6] = 17*cm;
+    LEPS_phi[6] = 180*deg;
+    LEPS_theta[6] = 90*deg;
+    LEPS_rotm[6].rotateY(90.0 *deg);
     
+    //  LEPS 8
+    LEPS_Presence[7] = true;
+    LEPS_Distance[7] = 17*cm;
+    LEPS_phi[7] = 135*deg;
+    LEPS_theta[7] = 90*deg;
+    LEPS_rotm[7].rotateY(90.0 *deg);
+    LEPS_rotm[7].rotateZ(-45.0 *deg);
     
     for (G4int i=0; i<numberOf_LEPS; i++)
     {
@@ -435,6 +449,52 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         if( LEPS_AllPresent_Override == true && LEPS_AllAbsent_Override == true ) LEPS_Presence[i] = false;
     }
 
+    ////////////////////////////////
+    ////        FLATSIDES CHAMBER SETUP
+    
+    
+    FLATSIDE_AllPresent_Override = false;
+    FLATSIDE_AllAbsent_Override = true;
+    
+    //  FLATSIDE 1
+    FLATSIDE_Presence[0] = true;
+    FLATSIDE_Distance[0] = 7*cm;
+    FLATSIDE_phi[0] = 180*deg;
+    FLATSIDE_theta[0] = 90*deg;
+    FLATSIDE_rotm[0].rotateY(85.0 *deg);
+    
+    //  FLATSIDE 2
+    FLATSIDE_Presence[1] = true;
+    FLATSIDE_Distance[1] = 7*cm;
+    FLATSIDE_phi[1] = 0*deg;
+    FLATSIDE_theta[1] = 90*deg;
+    FLATSIDE_rotm[1].rotateY(-85.*deg);
+    
+    
+    for (G4int i=0; i<numberOf_FLATSIDE; i++)
+    {
+        if( FLATSIDE_AllPresent_Override == true ) FLATSIDE_Presence[i] = true;
+        if( FLATSIDE_AllAbsent_Override == true ) FLATSIDE_Presence[i] = false;
+        if( FLATSIDE_AllPresent_Override == true && FLATSIDE_AllAbsent_Override == true ) FLATSIDE_Presence[i] = false;
+    }
+    
+    ////////////////////////////////
+    ////        AmBe Source SETUP
+    
+    
+   /* PARAFFINTUBE_Present_Override = true;
+    PARAFFINTUBE_Absent_Override = false;
+
+
+        if( PARAFFINTUBE_Present_Override == true ) PARAFFINTUBE_Presence = true;
+        if( PARAFFINTUBE_Absent_Override == true ) PARAFFINTUBE_Presence = false;
+        if( PARAFFINTUBE_Present_Override == true && PARAFFINTUBE_Absent_Override == true ) PARAFFINTUBE_Presence = false;
+  */
+    
+        PARAFFINTUBE_Presence = true;
+        IRONBOX_Presence = true;
+  
+    
     
     
     ////////////////////////////////////////////
@@ -539,6 +599,9 @@ void DetectorConstruction::DefineMaterials()
     nistManager->FindOrBuildMaterial("G4_SODIUM_IODIDE");
     nistManager->FindOrBuildMaterial("G4_LITHIUM_CARBONATE");
     nistManager->FindOrBuildMaterial("G4_Be");
+    nistManager->FindOrBuildMaterial("G4_POLYVINYL_CHLORIDE");
+    nistManager->FindOrBuildMaterial("G4_Fe");
+    nistManager->FindOrBuildMaterial("G4_PARAFFIN");
 
     //  NIST Elementary Material Database - ELEMENTS
     nistManager->FindOrBuildElement("H");
@@ -580,7 +643,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     G4Element* Tungsten = G4Element::GetElement("W");
     G4Element* Lithium = G4Element::GetElement("Li");
     G4Element* Argon = G4Element::GetElement("Ar");
-    
+    G4Element* Americium = G4Element::GetElement("Be");
+    G4Element* Beryllium = G4Element::GetElement("Be");
     
     //////////////////////////////////////
     //          Get Materials           //
@@ -593,6 +657,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     G4Material* G4_W_Material = G4Material::GetMaterial("G4_W");
     G4Material* G4_Ar_Material = G4Material::GetMaterial("G4_Ar");
     G4Material* G4_C_Material = G4Material::GetMaterial("G4_C");
+    G4Material* G4_Fe_Material = G4Material::GetMaterial("G4_Fe");
     
     ////    NIST Defined Materials and Compounds
     G4Material* G4_Galactic_Material = G4Material::GetMaterial("G4_Galactic");
@@ -604,6 +669,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     G4Material* G4_SODIUM_IODIDE_Material = G4Material::GetMaterial("G4_SODIUM_IODIDE");
     G4Material* G4_LITHIUM_CARBONATE_Material = G4Material::GetMaterial("G4_LITHIUM_CARBONATE");
     G4Material* G4_Be_Material = G4Material::GetMaterial("G4_Be");
+    G4Material* G4_POLYVINYL_CHLORIDE_Material = G4Material::GetMaterial("G4_POLYVINYL_CHLORIDE");
+    G4Material* G4_PARAFFIN_Material = G4Material::GetMaterial("G4_PARAFFIN");
 
     ////    CLOVER Detector Shield, HEAVIMET Material
     G4Material* Heavimet_Material = new G4Material("Heavimet_Material",19.25*g/cm3, 5);
@@ -633,6 +700,13 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     Vacuum_TC_Material->AddElement(Nitrogen, 75.5268*perCent);
     Vacuum_TC_Material->AddElement(Oxygen, 23.1781*perCent);
     Vacuum_TC_Material->AddElement(Argon, 1.2827*perCent);
+
+    ////    AmBeSource_Material
+    G4Material* AmBeSource_Material = new G4Material("AmBeSource", 1.0*g/cm3, 2);
+    AmBeSource_Material->AddElement(Beryllium, (9.0/250.0)*100*perCent);
+    AmBeSource_Material->AddElement(Americium, (241.0/250.0)*100*perCent);
+
+    
     
     
     /*
@@ -676,7 +750,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     
     G4ThreeVector positionVacuumChamber = G4ThreeVector(0,0,0);
     
-    G4Box* SolidVacuumChamber = new G4Box("VacuumChamber", (100./2)*cm, (100./2)*cm, (100./2)*cm);
+    G4Box* SolidVacuumChamber = new G4Box("VacuumChamber", (400./2)*cm, (400./2)*cm, (400./2)*cm);
     
     G4LogicalVolume* LogicVacuumChamber = new G4LogicalVolume(SolidVacuumChamber, G4_Galactic_Material,"VacuumChamber",0,0,0);
     
@@ -691,6 +765,270 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                       fCheckOverlaps); // checking overlaps
     
     
+   
+    
+    ////////////////////////////////////////
+    ////        FLATSIDE DEFINITION         ////
+    ////////////////////////////////////////
+    
+   // G4double FLATSIDE_thickness = 20.*mm;
+    G4double FLATSIDE_thickness = 3.*mm;
+    
+    G4Box* Solid_FLATSIDE = new G4Box("FlatSide",                             //its name
+                               15.*cm, 15.*cm, 0.5*FLATSIDE_thickness);     //its size
+
+    G4LogicalVolume* Logic_FLATSIDE[numberOf_FLATSIDE];
+    
+    for(G4int i=0; i<numberOf_FLATSIDE; i++)
+    {
+        Logic_FLATSIDE[i] = new G4LogicalVolume(Solid_FLATSIDE,          //its solid
+                                       G4_POLYVINYL_CHLORIDE_Material,           //its material
+                                                "LogicFlatSide",0, 0, 0);            //its name
+    }
+    
+    
+    
+    ////////////////////////////////////////////////////
+    //               FLATSIDE INITIALIZATION
+    ////////////////////////////////////////////////////
+    
+    
+    for(G4int i=0; i<numberOf_FLATSIDE; i++)
+    {
+        FLATSIDE_position[i] = (FLATSIDE_Distance[i])*G4ThreeVector( std::sin(FLATSIDE_theta[i]) * std::cos(FLATSIDE_phi[i]), std::sin(FLATSIDE_theta[i]) * std::sin(FLATSIDE_phi[i]), std::cos(FLATSIDE_theta[i]));
+        
+        FLATSIDE_transform[i] = G4Transform3D(FLATSIDE_rotm[i],FLATSIDE_position[i]);
+        
+    
+        
+        /////////////////////////////
+        //          FLATSIDE
+        if(FLATSIDE_Presence[i] == true)
+        {
+            
+            new G4PVPlacement(FLATSIDE_transform[i],   // transformation matrix
+                              Logic_FLATSIDE[i],       // its logical volume
+                              "FLATSIDE",       // its name
+                              LogicVacuumChamber,         // its mother  volume
+                              false,           // no boolean operations
+                              i,               // copy number
+                              fCheckOverlaps); // checking overlaps
+            
+            
+        }
+        
+    }
+
+    
+    ////////////////////////////////////////
+    ////     AmBe SOURCE                ////
+    ////////////////////////////////////////
+    
+    
+   ////************ PARAFFIN TUBE
+
+    G4ThreeVector positionParaffinTube = G4ThreeVector(0.,0.,0.);
+    
+    G4double ParaffinTube_innerRadius = 0.*cm;
+    G4double ParaffinTube_outerRadius = 10.*cm;
+    G4double ParaffinTube_hight = 10.*cm;
+    G4double startAngleOfTheTube = 0.*deg;
+    G4double spanningAngleOfTheTube = 360.*deg;
+    
+    G4Tubs* Solid_PARAFFINTUBE    = new G4Tubs("ParaffinTube",
+                 ParaffinTube_innerRadius,
+                 ParaffinTube_outerRadius,
+                 ParaffinTube_hight,
+                 startAngleOfTheTube,
+                 spanningAngleOfTheTube);
+    
+    
+    
+    G4double HoleBOX_thickness = 7.*cm;
+    G4double HoleBOX_width = 7.*cm;
+    G4double HoleBOX_hight = 14*cm;
+    
+    G4Box* Solid_HoleBOX = new G4Box("HoleBOX",                             //its name
+                                     0.5*HoleBOX_width, 0.5*HoleBOX_thickness,0.5*HoleBOX_hight);     //its size
+   
+    G4ThreeVector translationhole(0.,0.,3*cm);
+
+    G4SubtractionSolid* ParaffinBoxwithHole = new G4SubtractionSolid("ParaffinBoxwithHole",
+                                                                     Solid_PARAFFINTUBE,Solid_HoleBOX,0,translationhole);
+    
+    
+    G4LogicalVolume* Logic_PARAFFINBOX = new G4LogicalVolume(ParaffinBoxwithHole,          //its solid ParaffinBoxwithHole
+                                                             G4_PARAFFIN_Material,           //it material (G4_PARAFFIN)
+                                                             "ParaffinTube",0, 0, 0);            //its name
+   
+    
+    G4RotationMatrix rotm  = G4RotationMatrix();
+    G4double theta=-90*deg;
+    rotm.rotateX(theta);
+    G4Transform3D transform_ParaffinBox = G4Transform3D(rotm,positionParaffinTube);
+
+    
+    
+    
+    if(PARAFFINTUBE_Presence == true)
+    {
+        new G4PVPlacement(transform_ParaffinBox, // at (x,y,z)
+                      Logic_PARAFFINBOX,       // its logical volume
+                      "ParaffinBox",       // its name
+                      LogicVacuumChamber,         // its mother  volume
+                      false,           // no boolean operations
+                      0,               // copy number
+                      fCheckOverlaps); // checking overlaps
+
+    
+    }
+    
+    /*
+    
+    if(PARAFFINTUBE_Presence == true)
+    {
+        new G4PVPlacement(0,
+                          positionParaffinTube, // at (x,y,z)
+                          Logic_PARAFFINBOX,       // its logical volume
+                          "ParaffinBox",       // its name
+                          LogicWorld,         // its mother  volume
+                          false,           // no boolean operations
+                          0,               // copy number
+                          fCheckOverlaps); // checking overlaps
+        
+        
+    }
+*/
+    
+    ////************ IRON BOX
+
+
+    
+    
+    G4double IronBox_thickness = 7.*cm;
+    G4double IronBox_width = 7.*cm;
+    G4double IronBox_hight = 14*cm;
+    
+    G4Box* Solid_IronBox = new G4Box("IronBox",                             //its name
+                                     0.5*IronBox_width,0.5*IronBox_hight, 0.5*IronBox_thickness);     //its size
+    
+    G4double IronHole_thickness = 3.*cm;
+    G4double IronHole_width = 3.*cm;
+    G4double IronHole_hight = 12*cm;
+    
+    G4Box* Solid_IronHole = new G4Box("IronHole",                             //its name
+                                     0.5*IronHole_width,0.5*IronHole_hight, 0.5*IronHole_thickness);     //its size
+    
+    G4ThreeVector translationIronhole(0.,1.0*cm,0.);
+    
+    G4SubtractionSolid* IronBoxwithHole = new G4SubtractionSolid("IronBoxwithHole",
+                                                                     Solid_IronBox,Solid_IronHole,0,translationIronhole);
+    
+    
+    G4LogicalVolume* Logic_IRONBOX = new G4LogicalVolume(IronBoxwithHole,          //its solid
+                                                             G4_Fe_Material,           //it material
+                                                             "Logic_IronBox",0, 0, 0);            //its name
+
+    
+    
+    G4ThreeVector positionIronBox = G4ThreeVector(0.,3.0*cm,0.);
+
+    
+    if(IRONBOX_Presence == true)
+    {
+        new G4PVPlacement(0,
+                          positionIronBox, // at (x,y,z)
+                          Logic_IRONBOX,       // its logical volume
+                          "IronBox",       // its name
+                          LogicVacuumChamber,         // its mother  volume
+                          false,           // no boolean operations
+                          0,               // copy number
+                          fCheckOverlaps); // checking overlaps
+        
+        
+    }
+    
+    
+    
+    ////************ AmBe Source
+    
+    
+    
+    G4ThreeVector positionAmBeSource = G4ThreeVector(0.,0.,0.);
+    
+    G4Box* Solid_AmBeSource = new G4Box("AmBeSource", 0.01*cm, 0.01*cm, 0.01*cm);     //its size
+
+    G4LogicalVolume* Logic_AmBeSource = new G4LogicalVolume(Solid_AmBeSource,          //its solid
+                                                         AmBeSource_Material,           //it material
+                                                         "Logic_AmBeSource",0, 0, 0);            //its name
+
+    G4bool AmBeSource_Presence = true;
+    
+    if(AmBeSource_Presence == true)
+    {
+        new G4PVPlacement(0,
+                          positionIronBox, // at (x,y,z)
+                          Logic_AmBeSource,       // its logical volume
+                          "AmBeSource",       // its name
+                          LogicVacuumChamber,         // its mother  volume
+                          false,           // no boolean operations
+                          0,               // copy number
+                          fCheckOverlaps); // checking overlaps
+        
+        
+    }
+
+    
+    
+    //////***************//// PVC WALL = FLAT SIDES OF THE CHAMBER
+  /*
+    G4double Wthickness = 20.*mm;
+    G4double Wall_Frontface_Distance = 50.*mm; // distance of the wall frontface from the source
+    
+    
+    //////////////////// ROTATE THE DETECTOR and Endcup
+    G4RotationMatrix rotm  = G4RotationMatrix();
+    G4double theta=45*deg;
+    rotm.rotateY(theta);
+    G4double thetaTrans=theta+90*deg;
+    G4ThreeVector uz = G4ThreeVector(std::sin(thetaTrans), 0.,  std::cos(thetaTrans));
+    G4ThreeVector Wall_position = Wall_Frontface_Distance*uz;
+    G4Transform3D transform_Wall = G4Transform3D(rotm,Wall_position);
+
+    
+    /////////////////////////////////
+    
+    
+    
+    
+    G4ThreeVector posWall = G4ThreeVector(-(Wall_Frontface_Distance + 0.5*Wthickness),0., 0.);
+
+    
+    G4Box* solidWall =
+    new G4Box("Wall",                       //its name
+              30.*cm, 30.*cm, 0.5*Wthickness);     //its size
+    
+    G4LogicalVolume* logicWall =
+    new G4LogicalVolume(solidWall,          //its solid
+                        G4_POLYVINYL_CHLORIDE_Material,           //its material
+                        "Wall");            //its name
+    
+    G4VPhysicalVolume* physWall =
+    new G4PVPlacement(transform_Wall,       //at (0,0,0)
+                      "Wall",               //its name
+                      logicWall,            //its logical volume
+                      PhysiWorld,             //its mother  volume
+                      false,                 //no boolean operation
+                      0);
+    //                      0,                     //copy number
+    //                     checkOverlaps);        //overlaps checking
+    
+    
+    
+   */
+    
+    
+    /*********************************************************///////////////
     
     
     
@@ -2627,6 +2965,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
         }
         
     }
+    
     
     
     

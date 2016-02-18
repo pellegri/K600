@@ -80,7 +80,7 @@ const G4double      PADDLE_TotalSampledTime = PADDLE_SamplingTime * PADDLE_Total
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 ///////////////     CLOVER Detectors - PIXIE16 Sampling     ///////////////////
-const G4bool        Activate_CLOVER_ADDBACK = false;
+const G4bool        Activate_CLOVER_ADDBACK = true;
 const G4bool        Activate_CLOVER_ComptonSupression = false;
 
 const G4double      CLOVER_SamplingTime = 10; // ns
@@ -183,20 +183,45 @@ public:
     G4double GainCLOVER;
     G4double OffsetCLOVER;
     
-    G4double    CLOVER_HPGeCrystal_EDep[8][4][CLOVER_TotalTimeSamples];
-    G4bool      CLOVER_HPGeCrystal_EDepVETO[8][4][CLOVER_TotalTimeSamples];
-    G4double    CLOVER_EDep[8][CLOVER_TotalTimeSamples];
+    G4double    CLOVER_HPGeCrystal_EDep[9][4][CLOVER_TotalTimeSamples];
+    G4bool      CLOVER_HPGeCrystal_EDepVETO[9][4][CLOVER_TotalTimeSamples];
+    G4double    CLOVER_EDep[9][CLOVER_TotalTimeSamples];
     
     void AddEnergyCLOVER_HPGeCrystal(G4int i, G4int j, G4int k, G4double a)	{CLOVER_HPGeCrystal_EDep[i][j][k] += a; };
     
+    G4double    CLOVER_iEDep[9];
+    void SetCLOVER_iEDep(G4int i, G4double a)	{CLOVER_iEDep[i] = a;};
+    double GetCLOVER_iEDep(G4int i)	{return CLOVER_iEDep[i];};
+
     
     /////////////////////////////////////////
     //      CLOVER Shield BGO Crystals
-    G4double    CLOVER_BGO_EDep[8][16][CLOVER_Shield_BGO_TotalTimeSamples+CLOVER_ComptonSupression_TimeWindow];
+    G4double    CLOVER_BGO_EDep[9][16][CLOVER_Shield_BGO_TotalTimeSamples+CLOVER_ComptonSupression_TimeWindow];
     
     void AddEnergyBGODetectors(G4int i, G4int j, G4int k, G4double a)	{CLOVER_BGO_EDep[i][j][k] += a; };
+   
     
+    /////////////////////////////////////////
+    //      PARAFFIN BOX
+    G4double    PARAFFINBOX_EDep;
     
+    void AddEnergyParaffinBox(G4double a)	{PARAFFINBOX_EDep += a; };
+    
+    G4double    PARAFFINBOX_iEDep;
+    
+    void SetPARAFFINBOX_iEDep(G4double a)	{PARAFFINBOX_iEDep = a;};
+    double GetPARAFFINBOX_iEDep()	{return PARAFFINBOX_iEDep;};
+    
+    /////////////////////////////////////////
+    //      IRON BOX
+    G4double    IRONBOX_EDep;
+    
+    void AddEnergyIronBox(G4double a)	{IRONBOX_EDep += a; };
+    
+    G4double    IRONBOX_iEDep;
+    
+    void SetIRONBOX_iEDep(G4double a)	{IRONBOX_iEDep = a;};
+    double GetIRONBOX_iEDep()	{return IRONBOX_iEDep;};
     
     ////////////////////////
     //      LEPS
@@ -206,8 +231,8 @@ public:
     //G4double GainLEPS = 1.0;
     //G4double OffsetLEPS = 0.0;
     
-    G4double    LEPS_HPGeCrystal_EDep[6][4][LEPS_TotalTimeSamples];
-    G4double    LEPS_EDep[6][LEPS_TotalTimeSamples];
+    G4double    LEPS_HPGeCrystal_EDep[8][4][LEPS_TotalTimeSamples];
+    G4double    LEPS_EDep[8][LEPS_TotalTimeSamples];
     
     void AddEnergyLEPS_HPGeCrystals(G4int i, G4int j, G4int k, G4double a)	{LEPS_HPGeCrystal_EDep[i][j][k] += a; };
     

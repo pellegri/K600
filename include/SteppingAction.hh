@@ -111,6 +111,12 @@ private:
     G4int       LEPSNo;
     G4int       LEPS_HPGeCrystalNo;
     
+
+    ////    PARAFFIN BOX
+    G4double    edepParaffinBox;
+
+    ////    IRON BOX
+    G4double    edepIronBox;
     
     ////    GENERAL
     G4double    interactiontime;

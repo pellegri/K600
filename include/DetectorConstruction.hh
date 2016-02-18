@@ -99,7 +99,11 @@ const G4int     numberOf_PADDLE = 3;
 
 
 ///////////////     LEPS DETECTORS     ///////////////////
-const G4int     numberOf_LEPS = 6;
+const G4int     numberOf_LEPS = 8;
+
+///////////////     FLATSIDE CHAMBER     ///////////////////
+const G4int     numberOf_FLATSIDE = 2;
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -295,7 +299,29 @@ private:
     G4Transform3D       LEPS_HPGeCrystal_transform[4];
     G4RotationMatrix    LEPS_HPGeCrystal_rotm[4];
 
+    /////////////////////////////////////
+    //       FLATSIDE CHAMBER
+    /////////////////////////////////////
     
+    G4bool              FLATSIDE_AllPresent_Override;
+    G4bool              FLATSIDE_AllAbsent_Override;
+    G4bool              FLATSIDE_Presence[numberOf_FLATSIDE];
+    G4double            FLATSIDE_Distance[numberOf_FLATSIDE];
+    G4RotationMatrix    FLATSIDE_rotm[numberOf_FLATSIDE];
+    G4double            FLATSIDE_phi[numberOf_FLATSIDE];
+    G4double            FLATSIDE_theta[numberOf_FLATSIDE];
+    
+    G4Transform3D       FLATSIDE_transform[numberOf_FLATSIDE];
+    G4ThreeVector       FLATSIDE_position[numberOf_FLATSIDE];
+    
+    
+    /////////////////////////////////////
+    //       FLATSIDE CHAMBER
+    /////////////////////////////////////
+    
+    G4bool              PARAFFINTUBE_Presence;
+    G4bool              IRONBOX_Presence;
+    G4bool              AmBeBOX_Presence;
     
     ///////////////////////////////////////////////////////////////
     //          CLOVER - BGO Shield   (Manufacturer: Cyberstar)

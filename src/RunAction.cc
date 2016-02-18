@@ -111,7 +111,47 @@ RunAction::RunAction()
     
     // Creating ntuple
     analysisManager->CreateNtuple("DataTreeSim", "K600 Spectrometer - Coincident Events");
+    G4cout << "CreateNtuple" << G4endl;
     
+    ////    CLOVER Detectors
+    analysisManager->CreateNtupleIColumn(0, "CLOVER1_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER2_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER3_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER4_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER5_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER6_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER7_trig");
+    analysisManager->CreateNtupleIColumn(0, "CLOVER8_trig");
+    
+    analysisManager->CreateNtupleDColumn(0, "CLOVER1_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER2_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER3_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER4_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER5_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER6_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER7_Energy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER8_Energy");
+
+    analysisManager->CreateNtupleDColumn(0, "CLOVER1_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER2_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER3_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER4_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER5_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER6_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER7_iEnergy");
+    analysisManager->CreateNtupleDColumn(0, "CLOVER8_iEnergy");
+
+    ////    Paraffin Box
+    analysisManager->CreateNtupleIColumn(0, "PARAFFIN_trig");
+    analysisManager->CreateNtupleDColumn(0, "PARAFFIN_Energy");
+    analysisManager->CreateNtupleDColumn(0, "PARAFFIN_iEnergy");
+    //  analysisManager->CreateH1("CvsPARAFFIN_Energy","PARAFFIN_Energy - Counts versus Energy", 5000, 0., 5000.);
+    
+    ////    Iron Box
+    analysisManager->CreateNtupleIColumn(0, "IRON_trig");
+    analysisManager->CreateNtupleDColumn(0, "IRON_Energy");
+    analysisManager->CreateNtupleDColumn(0, "IRON_iEnergy");
+   
     /*
     ////    VDC Detectors
     analysisManager->CreateNtupleDColumn(0, "VDC1_Xpos");
@@ -137,15 +177,17 @@ RunAction::RunAction()
     analysisManager->CreateNtupleDColumn(0, "U2_Ypos");
     */
     
-    ////    LEPS Detectors
-    analysisManager->CreateNtupleIColumn("LEPS1_trig");
-    analysisManager->CreateNtupleIColumn("LEPS2_trig");
-    
     /*
+    ////    LEPS Detectors
+    analysisManager->CreateNtupleIColumn(0, "LEPS1_trig");
+    analysisManager->CreateNtupleIColumn(0, "LEPS2_trig");
+    
     analysisManager->CreateNtupleIColumn(0, "LEPS3_trig");
     analysisManager->CreateNtupleIColumn(0, "LEPS4_trig");
     analysisManager->CreateNtupleIColumn(0, "LEPS5_trig");
     analysisManager->CreateNtupleIColumn(0, "LEPS6_trig");
+    analysisManager->CreateNtupleIColumn(0, "LEPS7_trig");
+    analysisManager->CreateNtupleIColumn(0, "LEPS8_trig");
     */
     
     /*
@@ -157,17 +199,17 @@ RunAction::RunAction()
     analysisManager->CreateNtupleIColumn(0, "LEPS6_CrystalNo");
     */
     
-    analysisManager->CreateNtupleDColumn("LEPS1_Energy");
-    analysisManager->CreateNtupleDColumn("LEPS2_Energy");
-    //analysisManager->CreateNtupleDColumn(0, "LEPS3_Energy");
-
     /*
+    analysisManager->CreateNtupleDColumn(0, "LEPS1_Energy");
+    analysisManager->CreateNtupleDColumn(0, "LEPS2_Energy");
     analysisManager->CreateNtupleDColumn(0, "LEPS3_Energy");
     analysisManager->CreateNtupleDColumn(0, "LEPS4_Energy");
     analysisManager->CreateNtupleDColumn(0, "LEPS5_Energy");
     analysisManager->CreateNtupleDColumn(0, "LEPS6_Energy");
+    analysisManager->CreateNtupleDColumn(0, "LEPS7_Energy");
+    analysisManager->CreateNtupleDColumn(0, "LEPS8_Energy");
     */
-
+    
     ////    TIARA Detectors
     //analysisManager->CreateNtupleIColumn(0, "TIARANo");
     //analysisManager->CreateNtupleIColumn(0, "TIARA_RowNo");

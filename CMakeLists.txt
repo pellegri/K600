@@ -54,6 +54,7 @@ set(K600_SCRIPTS
   gui.mac
   run.png
   init_vis.mac
+  init.mac
   run1.mac
   run2.mac
   vis.mac

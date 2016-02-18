@@ -127,6 +127,8 @@ void EventAction::BeginOfEventAction(const G4Event* evt)
     
     for(G4int i=0; i<9; i++)
     {
+        CLOVER_iEDep[i] = 0.0;
+        
         for (G4int k=0; k<CLOVER_TotalTimeSamples; k++)
         {
             CLOVER_EDep[i][k] = 0;
@@ -148,7 +150,19 @@ void EventAction::BeginOfEventAction(const G4Event* evt)
         }
     }
     
-    for(G4int i=0; i<6; i++)
+
+        
+
+    PARAFFINBOX_EDep = 0.0;
+    PARAFFINBOX_iEDep = 0.0;
+    
+    IRONBOX_EDep = 0.0;
+    IRONBOX_iEDep = 0.0;
+    
+    
+    
+    
+    for(G4int i=0; i<8; i++)
     {
         for(G4int k=0; k<LEPS_TotalTimeSamples; k++)
         {
@@ -335,16 +349,20 @@ void EventAction::EndOfEventAction(const G4Event* event)
     //                CLOVER DETECTOR ARRAY
     //
     ////////////////////////////////////////////////////////
-    
+    bool eventTriggered_CLOVER = false;
+
     for(G4int i=0; i<9; i++)
     {
         for(G4int k=0; k<CLOVER_TotalTimeSamples; k++)
         {
             for(G4int j=0; j<4; j++)
             {
-                if(G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 0.7) >= CLOVER_HPGeCrystal_ThresholdEnergy)
+                //if(G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 0.7) >= CLOVER_HPGeCrystal_ThresholdEnergy)
+              //  if(CLOVER_HPGeCrystal_EDep[i][j][k]>0.0)
+                if(CLOVER_HPGeCrystal_EDep[i][j][k]>0.0)
                 {
-                    CLOVER_HPGeCrystal_EDep[i][j][k] = G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 1.7);
+                    eventTriggered_CLOVER = true;
+                    //CLOVER_HPGeCrystal_EDep[i][j][k] = G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 1.7);
                     
                     if(Activate_CLOVER_ComptonSupression)
                     {
@@ -382,11 +400,85 @@ void EventAction::EndOfEventAction(const G4Event* event)
                         //      For the Entire Clover Array
                         //analysisManager->FillH1(19, GainCLOVER*CLOVER_HPGeCrystal_EDep[i][j][k] +  OffsetCLOVER);
                     }
+                    
+                    analysisManager->FillNtupleIColumn(0, i, 1);
+                    analysisManager->FillNtupleDColumn(0, 8+i, CLOVER_EDep[i][k]);
+                    
                 }
             }
         }
     }
     
+    
+    
+    if(eventTriggered_CLOVER)
+    {
+        for(G4int i=0; i<8; i++)
+        {
+            analysisManager->FillNtupleDColumn(0, 16+i, CLOVER_iEDep[i]);
+            cout << "i " << i << " CLOVER_iEDep[i] " << CLOVER_iEDep[i] <<  endl;
+        }
+
+        analysisManager->AddNtupleRow(0);
+    }
+  
+    ////////////////////////////////////////////////////////
+    //
+    //                PARAFFIN BOX
+    //
+    ////////////////////////////////////////////////////////
+    
+    bool eventTriggered_PARAFFINBOX = false;
+    
+    
+
+    if(PARAFFINBOX_EDep>0.0)
+        {
+            eventTriggered_PARAFFINBOX = true;
+                
+            analysisManager->FillNtupleIColumn(0, 24, 1);
+            cout << "PARAFFINBOX_EDep   " << PARAFFINBOX_EDep <<  endl;
+            analysisManager->FillNtupleDColumn(0, 25, PARAFFINBOX_EDep);
+            //   analysisManager->FillH1(26,PARAFFINBOX_EDep);
+            //     cout << "PARAFFINBOX_EDep   " << PARAFFINBOX_EDep <<  endl;
+                    
+        }
+
+    
+    if(eventTriggered_PARAFFINBOX)
+    {
+        analysisManager->FillNtupleDColumn(0, 26, PARAFFINBOX_iEDep);
+        cout << "PARAFFINBOX_iEDep " << PARAFFINBOX_iEDep <<  endl;
+    }
+    
+    
+    ////////////////////////////////////////////////////////
+    //
+    //                IRON BOX
+    //
+    ////////////////////////////////////////////////////////
+    
+    bool eventTriggered_IRONBOX = false;
+    
+    
+    
+    if(IRONBOX_EDep>0.0)
+    {
+        eventTriggered_IRONBOX = true;
+        
+        analysisManager->FillNtupleIColumn(0, 27, 1);
+        cout << "IRONBOX_EDep   " << IRONBOX_EDep <<  endl;
+        analysisManager->FillNtupleDColumn(0, 28, IRONBOX_EDep);
+        
+    }
+    
+    
+    if(eventTriggered_IRONBOX)
+    {
+        analysisManager->FillNtupleDColumn(0, 29, IRONBOX_iEDep);
+        cout << "IRONBOX_iEDep " << IRONBOX_iEDep <<  endl;
+    }
+
     
     
     ////////////////////////////////////////////////////
@@ -399,7 +491,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     OffsetLEPS = 0.0;
     bool eventTriggered_LEPS = false;
     
-    for(G4int i=0; i<6; i++)
+    for(G4int i=0; i<8; i++)
     {
         for(G4int k=0; k<LEPS_TotalTimeSamples; k++)
         {
@@ -408,20 +500,32 @@ void EventAction::EndOfEventAction(const G4Event* event)
                 if(G4RandGauss::shoot(LEPS_HPGeCrystal_EDep[i][j][k], 0.7) >= LEPS_HPGeCrystal_ThresholdEnergy)
                 {
                     LEPS_HPGeCrystal_EDep[i][j][k] = abs(G4RandGauss::shoot(LEPS_HPGeCrystal_EDep[i][j][k], 1.7));
+                //    cout << "LEPS_HPGeCrystal_EDep[i][j][k]    " << LEPS_HPGeCrystal_EDep[i][j][k]<< "  i  j  k  " << i <<"   "<< j << "   " << k<< endl;
+                    
                     
                     //      ADDBACK
                     if(Activate_LEPS_ADDBACK)
                     {
-                        LEPS_EDep[i][k] += LEPS_HPGeCrystal_EDep[i][j][k];
+                       LEPS_EDep[i][k] += LEPS_HPGeCrystal_EDep[i][j][k];
+               //         cout << "1111111111LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "  i  j  k  " << i << "   " << k<< endl;
                     }
                 }
+                
+                     //        cout << "LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "  i  j  k  " << i << "   " << k<< endl;
             }
             
+
+        //    cout << "Activate_LEPS_ADDBACK    " << Activate_LEPS_ADDBACK << "LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "i  k  " << i <<"   "<< k << "LEPS_HPGeCrystal_ThresholdEnergy   " << LEPS_HPGeCrystal_ThresholdEnergy<< endl;
             if(Activate_LEPS_ADDBACK && LEPS_EDep[i][k] >= LEPS_HPGeCrystal_ThresholdEnergy)
             {
                 analysisManager->FillNtupleIColumn(0, i, 1);
-                analysisManager->FillNtupleDColumn(0, i+2, GainLEPS*LEPS_EDep[i][k] + OffsetLEPS);
+                analysisManager->FillNtupleDColumn(0, i+8, GainLEPS*LEPS_EDep[i][k] + OffsetLEPS);
                 eventTriggered_LEPS = true;
+                
+         //   cout << "++++++++++++++++++Activate_LEPS_ADDBACK    " << Activate_LEPS_ADDBACK << "   LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "   i  k  " << i <<"   "<< k << "    LEPS_HPGeCrystal_ThresholdEnergy   " << LEPS_HPGeCrystal_ThresholdEnergy<< "    eventTriggered_LEPS   " << eventTriggered_LEPS << endl;
+                
+                
+                
             }
         }
     }
