@@ -83,7 +83,7 @@ const G4double      PADDLE_TotalSampledTime = PADDLE_SamplingTime * PADDLE_Total
 const G4bool        Activate_CLOVER_ADDBACK = true;
 const G4bool        Activate_CLOVER_ComptonSupression = false;
 
-const G4double      CLOVER_SamplingTime = 10; // ns
+const G4double      CLOVER_SamplingTime = 1000; // ns
 const G4int         CLOVER_TotalTimeSamples = 10; //
 const G4double      CLOVER_TotalSampledTime = CLOVER_SamplingTime * CLOVER_TotalTimeSamples; // ns
 const G4int         CLOVER_ComptonSupression_TimeWindow = 3; // Amount of CLOVER Time Samples
@@ -376,6 +376,9 @@ public:
     double GetGA_TIARA(G4int i, G4int j)	{return GA_TIARA_AA[i][j];};
     
     
+    G4double totalEnergyDeposition;
+    void SetTotalEnergyDeposition(G4double a)	{totalEnergyDeposition += a;};
+
     
 private:
     G4double  fEnergyAbs;

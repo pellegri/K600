@@ -6,7 +6,7 @@
 /vis/viewer/set/lightsThetaPhi 40 140
 #
 #
-/run/printProgress 10000
+/run/printProgress 100
 #
 # Use this to set the geometry test tolerance
 #/geometry/test/tolerance 0.01 um

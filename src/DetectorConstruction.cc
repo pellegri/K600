@@ -320,7 +320,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     CLOVER_rotm[3].rotateY(45.0 *deg);
     
     //  CLOVER 5
-    CLOVER_Presence[4] = true;
+    CLOVER_Presence[4] = false;
     CLOVER_Shield_Presence[4] = false;
     CLOVER_Distance[4] = 100*cm;
     CLOVER_phi[4] = 45*deg;
@@ -329,7 +329,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     CLOVER_rotm[4].rotateZ(-135.0 *deg);
     
     //  CLOVER 6
-    CLOVER_Presence[5] = true;
+    CLOVER_Presence[5] = false;
     CLOVER_Shield_Presence[5] = false;
     CLOVER_Distance[5] = 100*cm;
     CLOVER_phi[5] = 0*deg;
@@ -337,7 +337,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     CLOVER_rotm[5].rotateY(-90.0 *deg);
     
     //  CLOVER 7
-    CLOVER_Presence[6] = true;
+    CLOVER_Presence[6] = false;
     CLOVER_Shield_Presence[6] = false;
     CLOVER_Distance[6] = 100*cm;
     CLOVER_phi[6] = 180*deg;
@@ -345,7 +345,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     CLOVER_rotm[6].rotateY(90.0 *deg);
     
     //  CLOVER 8
-    CLOVER_Presence[7] = true;
+    CLOVER_Presence[7] = false;
     CLOVER_Shield_Presence[7] = false;
     CLOVER_Distance[7] = 100*cm;
     CLOVER_phi[7] = 135*deg;
@@ -549,7 +549,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     ////////////////////////////////////////////////
     ////    New K600 Target Chamber - New scattering chamber, both sides off
-    K600_BACTAR_sidesOff_Presence = true;
+    K600_BACTAR_sidesOff_Presence = false;
     
     ////////////////////////////////////////////////
     ////    New K600 Target Chamber - New scattering chamber, beam left side side off

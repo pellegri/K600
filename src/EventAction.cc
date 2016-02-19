@@ -223,6 +223,7 @@ void EventAction::BeginOfEventAction(const G4Event* evt)
     InputDist[0] = 0;
     InputDist[1] = 0;
     
+    totalEnergyDeposition = 0.0;
     
 }
 
@@ -357,10 +358,13 @@ void EventAction::EndOfEventAction(const G4Event* event)
         {
             for(G4int j=0; j<4; j++)
             {
+
                 //if(G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 0.7) >= CLOVER_HPGeCrystal_ThresholdEnergy)
               //  if(CLOVER_HPGeCrystal_EDep[i][j][k]>0.0)
                 if(CLOVER_HPGeCrystal_EDep[i][j][k]>0.0)
                 {
+                    //cout << "HELLOOOOOOOOO" << G4endl;
+
                     eventTriggered_CLOVER = true;
                     //CLOVER_HPGeCrystal_EDep[i][j][k] = G4RandGauss::shoot(CLOVER_HPGeCrystal_EDep[i][j][k], 1.7);
                     
@@ -380,8 +384,12 @@ void EventAction::EndOfEventAction(const G4Event* event)
                         if (CLOVER_HPGeCrystal_EDepVETO[i][j][k]) CLOVER_HPGeCrystal_EDep[i][j][k] = 0;
                     }
                     
+
+                    
                     if(Activate_CLOVER_ADDBACK && CLOVER_HPGeCrystal_EDep[i][j][k] != 0)
                     {
+                        //cout << "HELLOOOOOOOOO" << G4endl;
+
                         //      ADDBACK
                         CLOVER_EDep[i][k] += CLOVER_HPGeCrystal_EDep[i][j][k];
                         
@@ -401,8 +409,6 @@ void EventAction::EndOfEventAction(const G4Event* event)
                         //analysisManager->FillH1(19, GainCLOVER*CLOVER_HPGeCrystal_EDep[i][j][k] +  OffsetCLOVER);
                     }
                     
-                    analysisManager->FillNtupleIColumn(0, i, 1);
-                    analysisManager->FillNtupleDColumn(0, 8+i, CLOVER_EDep[i][k]);
                     
                 }
             }
@@ -411,15 +417,30 @@ void EventAction::EndOfEventAction(const G4Event* event)
     
     
     
+    
     if(eventTriggered_CLOVER)
     {
         for(G4int i=0; i<8; i++)
         {
+            for(G4int k=0; k<CLOVER_TotalTimeSamples; k++)
+            {
+                if(CLOVER_EDep[i][k]>0.0)
+                {
+                    analysisManager->FillNtupleIColumn(0, i, 1);
+                    analysisManager->FillNtupleDColumn(0, 8+i, CLOVER_EDep[i][k]);
+                    //cout << " CLOVER_EDep[i][k]:    " << CLOVER_EDep[i][k] <<  endl;
+                }
+            }
+            
             analysisManager->FillNtupleDColumn(0, 16+i, CLOVER_iEDep[i]);
-            cout << "i " << i << " CLOVER_iEDep[i] " << CLOVER_iEDep[i] <<  endl;
+            
+            if(CLOVER_iEDep[i]>0.0)
+            {
+                //cout << " CLOVER_iEDep[i]:    " << CLOVER_iEDep[i] <<  endl;
+            }
+
         }
 
-        analysisManager->AddNtupleRow(0);
     }
   
     ////////////////////////////////////////////////////////
@@ -437,7 +458,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
             eventTriggered_PARAFFINBOX = true;
                 
             analysisManager->FillNtupleIColumn(0, 24, 1);
-            cout << "PARAFFINBOX_EDep   " << PARAFFINBOX_EDep <<  endl;
+    //        cout << "PARAFFINBOX_EDep   " << PARAFFINBOX_EDep <<  endl;
             analysisManager->FillNtupleDColumn(0, 25, PARAFFINBOX_EDep);
             //   analysisManager->FillH1(26,PARAFFINBOX_EDep);
             //     cout << "PARAFFINBOX_EDep   " << PARAFFINBOX_EDep <<  endl;
@@ -448,7 +469,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     if(eventTriggered_PARAFFINBOX)
     {
         analysisManager->FillNtupleDColumn(0, 26, PARAFFINBOX_iEDep);
-        cout << "PARAFFINBOX_iEDep " << PARAFFINBOX_iEDep <<  endl;
+      //  cout << "PARAFFINBOX_iEDep " << PARAFFINBOX_iEDep <<  endl;
     }
     
     
@@ -467,19 +488,28 @@ void EventAction::EndOfEventAction(const G4Event* event)
         eventTriggered_IRONBOX = true;
         
         analysisManager->FillNtupleIColumn(0, 27, 1);
-        cout << "IRONBOX_EDep   " << IRONBOX_EDep <<  endl;
+        //cout << "IRONBOX_EDep   " << IRONBOX_EDep <<  endl;
         analysisManager->FillNtupleDColumn(0, 28, IRONBOX_EDep);
         
+        //G4cout << "PARAFFINBOX_iEDep:    " << IRONBOX_EDep <<  G4endl;
     }
     
     
     if(eventTriggered_IRONBOX)
     {
         analysisManager->FillNtupleDColumn(0, 29, IRONBOX_iEDep);
-        cout << "IRONBOX_iEDep " << IRONBOX_iEDep <<  endl;
+    //    cout << "IRONBOX_iEDep " << IRONBOX_iEDep <<  endl;
     }
 
+    if(eventTriggered_CLOVER || eventTriggered_PARAFFINBOX || eventTriggered_IRONBOX)
+    {
+        analysisManager->AddNtupleRow(0);
+    }
     
+ //   G4cout << " " << G4endl;
+//    G4cout << "HELLO! HERE IS THE TOTAL DEPOSITION:     " << totalEnergyDeposition << G4endl;
+ //   G4cout << " " << G4endl;
+
     
     ////////////////////////////////////////////////////
     //

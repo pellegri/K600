@@ -141,7 +141,7 @@ int main(int argc,char** argv)
     G4PhysListFactory factory;
     G4VModularPhysicsList* phys = 0;
     //G4String physName = "QGSP_BERT";
-    G4String physName = "QGSP_BERT";
+    G4String physName = "QGSP_BERT_HP";
     // reference PhysicsList via its name
     phys = factory.GetReferencePhysList(physName);
     phys->RegisterPhysics(new G4RadioactiveDecayPhysics());

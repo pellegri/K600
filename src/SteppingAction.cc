@@ -305,9 +305,12 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     
     if(interactiontime < CLOVER_TotalSampledTime)
     {
-       // if (volumeName == "CLOVER_HPGeCrystal" && particleName == "neutron")
-        if (volumeName == "CLOVER_HPGeCrystal" && particleName == "gamma")
+       // if(volumeName == "CLOVER_HPGeCrystal" && particleName=="neutron")
+       // if(volumeName == "CLOVER_HPGeCrystal" && particleName=="gamma")
+        if(volumeName == "CLOVER_HPGeCrystal" && particleName!="gamma")
         {
+            //G4cout << "particleName:    " << particleName <<  G4endl;
+
             channelID = volume->GetCopyNo();
             
             CLOVERNo = channelID/4;
@@ -335,9 +338,10 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
                 
              //   G4cout << "line 335  &&&&&&&&&&&&&&&&&&& "<< fEventAction->GetCLOVER_iEDep(CLOVERNo) <<G4endl;
                 
-                double initialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
+                G4double initialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
                 fEventAction->SetCLOVER_iEDep(CLOVERNo, initialE);
                 
+            //    if(initialE>0.0) G4cout << "HELOOOOOOO:    " << initialE << G4endl;
             //    G4cout << "line 340 -------------- "<< initialE <<G4endl;
             }
 
@@ -370,26 +374,28 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     ////////////////////////////////////////////////
     
 
-    
-  //  if(volumeName == "ParaffinBox" && particleName == "neutron")
-    if(volumeName == "ParaffinBox" && particleName == "gamma")
+    // if(volumeName == "ParaffinBox" && particleName == "gamma")
+    if(volumeName == "ParaffinBox")
     {
-        
+        //if(particleName=="neutron") G4cout << "particleName:    " << particleName <<  G4endl;
+        //G4cout << "particleName:    " << particleName <<  G4endl;
+
         
         edepParaffinBox = aStep->GetTotalEnergyDeposit()/keV;
-   //     G4cout << "line 371 ------------ edepParaffinBox   "<< edepParaffinBox << G4endl;
+        //G4cout << "line 412 ------------ E depos in Paraffin   "<< edepParaffinBox << G4endl;
+        //G4cout << "line 412 ------------ E depos in Paraffin   "<< edepParaffinBox << G4endl;
         
         fEventAction->AddEnergyParaffinBox(edepParaffinBox);
         
         
         
 
-          //  G4cout << "line 377  ******************* "<< ParaffinBoxInitialE <<G4endl;
-            G4cout << "line 378  §§§§§§§§§§§ Parrafin box energy initial BEFORE loop "<< fEventAction->GetPARAFFINBOX_iEDep() <<G4endl;
+            //G4cout << "line 377  ******************* "<< ParaffinBoxInitialE <<G4endl;
+            //G4cout << "line 378  §§§§§§§§§§§ Parrafin box energy initial BEFORE loop "<< fEventAction->GetPARAFFINBOX_iEDep() <<G4endl;
             if(fEventAction->GetPARAFFINBOX_iEDep() == 0.0){
-                G4cout << "line 379  +++++++++++++ Parrafin box energy initial AFTER loop "<< fEventAction->GetPARAFFINBOX_iEDep() << G4endl;
-                double ParaffinBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
-                G4cout << "&&&&&&&&&&&&&&&&&&&&&   Parrafin box energy initial SET  "<< ParaffinBoxInitialE << G4endl;
+                //G4cout << "line 379  +++++++++++++ Parrafin box energy initial AFTER loop "<< fEventAction->GetPARAFFINBOX_iEDep() << G4endl;
+                G4double ParaffinBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
+                //G4cout << "&&&&&&&&&&&&&&&&&&&&&   Parrafin box energy initial SET  "<< ParaffinBoxInitialE << G4endl;
                 fEventAction->SetPARAFFINBOX_iEDep(ParaffinBoxInitialE);
             }
         
@@ -401,32 +407,40 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     //              IRON BOX
     ////////////////////////////////////////////////
     
-    
+    G4double IronBoxInitialE;
     
     // if(volumeName == "IronBox" && particleName == "neutron")
-    if(volumeName == "IronBox" && particleName == "gamma")
+   // if(volumeName == "IronBox" && particleName == "gamma")
+    if(volumeName == "IronBox" && particleName == "neutron")
     {
         
         
         edepIronBox = aStep->GetTotalEnergyDeposit()/keV;
+        //G4cout << "line 412 ------------ E depos in Iron   "<< edepIronBox << G4endl;
+        
         
         fEventAction->AddEnergyIronBox(edepIronBox);
         
         
-        
-    
-        G4cout << "line 418  §§§§§§§§§§ Iron box energy initial BEFORE loop "<< fEventAction->GetIRONBOX_iEDep() <<G4endl;
+        //G4cout << "line 418  §§§§§§§§§§ Iron box energy initial BEFORE loop "<< fEventAction->GetIRONBOX_iEDep() <<G4endl;
         
         if(fEventAction->GetIRONBOX_iEDep() == 0.0){
-            G4cout << "line 421  +++++++++++++ Iron box energy initial AFTER loop "<< fEventAction->GetIRONBOX_iEDep() << G4endl;
-            double IronBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
-            G4cout << "&&&&&&&&&&&&&&&&&&&&&   Iron box energy initial SET     "<< IronBoxInitialE << G4endl;
+            //G4cout << "line 421  +++++++++++++ Iron box energy initial AFTER loop "<< fEventAction->GetIRONBOX_iEDep() << G4endl;
+            IronBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
+            //G4cout << "&&&&&&&&&&&&&&&&&&&&&   Iron box energy initial SET     "<< IronBoxInitialE << G4endl;
             fEventAction->SetIRONBOX_iEDep(IronBoxInitialE);
         }
         
         
     }
     
+    
+    edepParaffinBox = aStep->GetTotalEnergyDeposit()/keV;
+    if(edepParaffinBox>0.0)
+    {
+    //    G4cout << "Energy deposited:   "<< edepParaffinBox << G4endl;
+        fEventAction->SetTotalEnergyDeposition(edepParaffinBox);
+    }
     
     
     ////////////////////////////////////////////////
