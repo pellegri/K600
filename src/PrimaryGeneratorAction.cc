@@ -81,7 +81,7 @@ fParticleGun(0)
     //fParticleGun->SetParticleEnergy(0.*MeV);
     //fParticleGun->SetParticleEnergy(0.100*MeV);
     //fParticleGun->SetParticleEnergy(1.332*MeV);
-    fParticleGun->SetParticleEnergy(4.0*MeV);
+    fParticleGun->SetParticleEnergy(4.5*MeV);
     
     //fParticleGun->SetParticleEnergy(200.*MeV);
     //fParticleGun->SetParticleEnergy(22.5*MeV);
