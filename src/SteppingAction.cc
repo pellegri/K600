@@ -375,7 +375,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     
 
     // if(volumeName == "ParaffinBox" && particleName == "gamma")
-    if(volumeName == "ParaffinBox")
+    if(volumeName == "ParaffinBox"&& particleName!="gamma")
     {
         //if(particleName=="neutron") G4cout << "particleName:    " << particleName <<  G4endl;
         //G4cout << "particleName:    " << particleName <<  G4endl;
@@ -411,7 +411,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     
     // if(volumeName == "IronBox" && particleName == "neutron")
    // if(volumeName == "IronBox" && particleName == "gamma")
-    if(volumeName == "IronBox" && particleName == "neutron")
+    if(volumeName == "IronBox" && particleName!="gamma")
     {
         
         
