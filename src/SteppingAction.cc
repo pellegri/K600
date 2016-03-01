@@ -340,7 +340,9 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
                 
                 G4double initialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
                 fEventAction->SetCLOVER_iEDep(CLOVERNo, initialE);
-                
+                if(initialE>5000){
+		 G4cout << " CLOVER incident E     "<< initialE <<  "		particleName     "<<particleName << G4endl;
+		}
             //    if(initialE>0.0) G4cout << "HELOOOOOOO:    " << initialE << G4endl;
             //    G4cout << "line 340 -------------- "<< initialE <<G4endl;
             }
@@ -373,6 +375,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     //              PARAFFIN BOX
     ////////////////////////////////////////////////
     
+ G4double ParaffinBoxInitialE; 
 
     // if(volumeName == "ParaffinBox" && particleName == "gamma")
     if(volumeName == "ParaffinBox"&& particleName!="gamma")
@@ -386,15 +389,20 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         //G4cout << "line 412 ------------ E depos in Paraffin   "<< edepParaffinBox << G4endl;
         
         fEventAction->AddEnergyParaffinBox(edepParaffinBox);
-        
-        
-        
-
+	/*
+           if(ParaffinBoxFinalE>5000){
+		 G4cout << " ParaffinBoxFinalE     "<< ParaffinBoxFinalE <<  "			   particleName     "<<particleName << G4endl;
+		}
+       */ 
+       
             //G4cout << "line 377  ******************* "<< ParaffinBoxInitialE <<G4endl;
             //G4cout << "line 378  §§§§§§§§§§§ Parrafin box energy initial BEFORE loop "<< fEventAction->GetPARAFFINBOX_iEDep() <<G4endl;
             if(fEventAction->GetPARAFFINBOX_iEDep() == 0.0){
                 //G4cout << "line 379  +++++++++++++ Parrafin box energy initial AFTER loop "<< fEventAction->GetPARAFFINBOX_iEDep() << G4endl;
-                G4double ParaffinBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
+                 ParaffinBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
+		if(ParaffinBoxInitialE>5000){
+		 G4cout << " PARAFFIN incident E     "<< ParaffinBoxInitialE <<  "		particleName     "<<particleName << G4endl;
+		}
                 //G4cout << "&&&&&&&&&&&&&&&&&&&&&   Parrafin box energy initial SET  "<< ParaffinBoxInitialE << G4endl;
                 fEventAction->SetPARAFFINBOX_iEDep(ParaffinBoxInitialE);
             }
@@ -420,14 +428,16 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         
         
         fEventAction->AddEnergyIronBox(edepIronBox);
-        
+
         
         //G4cout << "line 418  §§§§§§§§§§ Iron box energy initial BEFORE loop "<< fEventAction->GetIRONBOX_iEDep() <<G4endl;
         
         if(fEventAction->GetIRONBOX_iEDep() == 0.0){
             //G4cout << "line 421  +++++++++++++ Iron box energy initial AFTER loop "<< fEventAction->GetIRONBOX_iEDep() << G4endl;
             IronBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
-            //G4cout << "&&&&&&&&&&&&&&&&&&&&&   Iron box energy initial SET     "<< IronBoxInitialE << G4endl;
+		if(IronBoxInitialE>5000){
+		 G4cout << "IRON incident E       "<< IronBoxInitialE <<  "		particleName     "<<particleName << G4endl;
+		}
             fEventAction->SetIRONBOX_iEDep(IronBoxInitialE);
         }
         

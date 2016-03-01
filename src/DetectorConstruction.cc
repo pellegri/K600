@@ -290,7 +290,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     //  CLOVER 1
     CLOVER_Presence[0] = true;
     CLOVER_Shield_Presence[0] = false;
-    CLOVER_Distance[0] = 100*cm;
+    CLOVER_Distance[0] = 10*cm;
     CLOVER_phi[0] = 90*deg;
     CLOVER_theta[0] = 135*deg;
     CLOVER_rotm[0].rotateX(45. *deg);
@@ -298,7 +298,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     //  CLOVER 2
     CLOVER_Presence[1] = true;
     CLOVER_Shield_Presence[1] = false;
-    CLOVER_Distance[1] = 100*cm;
+    CLOVER_Distance[1] = 10*cm;
     CLOVER_phi[1] = 0*deg;
     CLOVER_theta[1] = 135*deg;
     CLOVER_rotm[1].rotateY(-45.0 *deg);
@@ -306,7 +306,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     //  CLOVER 3
     CLOVER_Presence[2] = true;
     CLOVER_Shield_Presence[2] = false;
-    CLOVER_Distance[2] = 100*cm;
+    CLOVER_Distance[2] = 10*cm;
     CLOVER_phi[2] = 270*deg;
     CLOVER_theta[2] = 135*deg;
     CLOVER_rotm[2].rotateX(-45.0 *deg);

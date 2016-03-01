@@ -195,7 +195,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //       Initial Energy Distribution of Particle
     ///////////////////////////////////////////////////
 
-    G4double InitialEnergy = G4RandGauss::shoot(4.0, 0.1);
+    G4double InitialEnergy = G4RandGauss::shoot(4.5, 0.1);
     //G4double InitialEnergy = ((12.049-7.16192)*(0.75)); // MeV
     
     //  Empirical
