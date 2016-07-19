@@ -307,7 +307,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     {
        // if(volumeName == "CLOVER_HPGeCrystal" && particleName=="neutron")
        // if(volumeName == "CLOVER_HPGeCrystal" && particleName=="gamma")
-        if(volumeName == "CLOVER_HPGeCrystal" && particleName!="gamma")
+        if(volumeName == "CLOVER_HPGeCrystal" && particleName == "gamma")
         {
             //G4cout << "particleName:    " << particleName <<  G4endl;
 
@@ -340,9 +340,9 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
                 
                 G4double initialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
                 fEventAction->SetCLOVER_iEDep(CLOVERNo, initialE);
-                if(initialE>5000){
-		 G4cout << " CLOVER incident E     "<< initialE <<  "		particleName     "<<particleName << G4endl;
-		}
+            
+              //  G4cout << " CLOVER incident E     "<< initialE <<  "		particleName     "<<particleName << G4endl;
+		
             //    if(initialE>0.0) G4cout << "HELOOOOOOO:    " << initialE << G4endl;
             //    G4cout << "line 340 -------------- "<< initialE <<G4endl;
             }
@@ -375,10 +375,12 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     //              PARAFFIN BOX
     ////////////////////////////////////////////////
     
- G4double ParaffinBoxInitialE; 
+ G4double ParaffinBoxInitialE;
+    
+ const G4String& processName = aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
 
     // if(volumeName == "ParaffinBox" && particleName == "gamma")
-    if(volumeName == "ParaffinBox"&& particleName!="gamma")
+    if(volumeName == "ParaffinBox" && particleName == "gamma")
     {
         //if(particleName=="neutron") G4cout << "particleName:    " << particleName <<  G4endl;
         //G4cout << "particleName:    " << particleName <<  G4endl;
@@ -394,19 +396,68 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
 		 G4cout << " ParaffinBoxFinalE     "<< ParaffinBoxFinalE <<  "			   particleName     "<<particleName << G4endl;
 		}
        */ 
-       
+       		/*if(particleName!="neutron"){ G4cout << "particleName     "<< particleName << "  Process name " << aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName() << G4endl;
+            }*/
             //G4cout << "line 377  ******************* "<< ParaffinBoxInitialE <<G4endl;
             //G4cout << "line 378  §§§§§§§§§§§ Parrafin box energy initial BEFORE loop "<< fEventAction->GetPARAFFINBOX_iEDep() <<G4endl;
             if(fEventAction->GetPARAFFINBOX_iEDep() == 0.0){
                 //G4cout << "line 379  +++++++++++++ Parrafin box energy initial AFTER loop "<< fEventAction->GetPARAFFINBOX_iEDep() << G4endl;
                  ParaffinBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
-		if(ParaffinBoxInitialE>5000){
-		 G4cout << " PARAFFIN incident E     "<< ParaffinBoxInitialE <<  "		particleName     "<<particleName << G4endl;
-		}
+		/*if(ParaffinBoxInitialE>5000){
+		 G4cout << " PARAFFIN incident E     "<< ParaffinBoxInitialE <<  "		particleName     "<< particleName << "Process name " << aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName() << G4endl;
+		}*/
                 //G4cout << "&&&&&&&&&&&&&&&&&&&&&   Parrafin box energy initial SET  "<< ParaffinBoxInitialE << G4endl;
                 fEventAction->SetPARAFFINBOX_iEDep(ParaffinBoxInitialE);
             }
         
+        
+     /*
+        G4double flagParticle=-1.;
+        G4double flagProcess=-1.;
+        G4double x,y,z,xp,yp,zp;
+        const G4String& particleName = aStep->GetTrack()->GetDynamicParticle()->GetDefinition()->GetParticleName();
+        const G4String& processName = aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
+        // Particle
+        if (particleName == "neutron")       flagParticle = 1;
+        else if (particleName == "e-")       flagParticle = 2;
+        else if (particleName == "proton")   flagParticle = 3;
+        else if (particleName == "deuteron") flagParticle = 4;
+        else if (particleName == "e+")       flagParticle = 5;
+        else if (particleName == "helium")   flagParticle = 6;
+        else if (particleName == "12C")      flagParticle = 7;
+     
+        // Processes
+        if (processName=="hadElastic")    flagProcess =11;
+        else if (processName=="eIoni")    flagProcess =12;
+        else if (processName=="hIoni")    flagProcess =13;
+        else if (processName=="ionIoni")    flagProcess =14;
+        else if (processName=="RadioactiveDecay")  flagProcess =15;
+        
+
+            x=aStep->GetPreStepPoint()->GetPosition().x()/nanometer;
+            y=aStep->GetPreStepPoint()->GetPosition().y()/nanometer;
+            z=aStep->GetPreStepPoint()->GetPosition().z()/nanometer;
+            xp=aStep->GetPostStepPoint()->GetPosition().x()/nanometer;
+            yp=aStep->GetPostStepPoint()->GetPosition().y()/nanometer;
+            zp=aStep->GetPostStepPoint()->GetPosition().z()/nanometer;
+      
+        
+            // get analysis manager
+         //   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+            
+            // fill ntuple
+            G4AnalysisManager::Instance()->FillH1(flagParticle);
+            //analysisManager->FillNtupleDColumn(1, flagProcess);
+            //analysisManager->FillNtupleDColumn(2, x);
+          //  analysisManager->FillNtupleDColumn(3, y);
+         //   analysisManager->FillNtupleDColumn(4, z);
+          //  analysisManager->FillNtupleDColumn(2, aStep->GetTotalEnergyDeposit()/eV);
+         //   analysisManager->FillNtupleDColumn(6,std::sqrt((x-xp)*(x-xp)+y-yp)*(y-yp)+(z-zp)*(z-zp))/nm);
+         //   analysisManager->FillNtupleDColumn(3,(aStep->GetPreStepPoint()->GetKineticEnergy()-aStep->GetPostStepPoint()->GetKineticEnergy())/eV );
+           // analysisManager->FillNtupleIColumn(4, G4EventManager::GetEventManager()->GetConstCurrentEvent()->GetEventID());
+            //analysisManager->AddNtupleRow();
+
+       */
         
     }
     
@@ -419,7 +470,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     
     // if(volumeName == "IronBox" && particleName == "neutron")
    // if(volumeName == "IronBox" && particleName == "gamma")
-    if(volumeName == "IronBox" && particleName!="gamma")
+    if(volumeName == "IronBox" && particleName == "gamma")
     {
         
         
@@ -435,9 +486,9 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         if(fEventAction->GetIRONBOX_iEDep() == 0.0){
             //G4cout << "line 421  +++++++++++++ Iron box energy initial AFTER loop "<< fEventAction->GetIRONBOX_iEDep() << G4endl;
             IronBoxInitialE = aStep->GetPreStepPoint()->GetKineticEnergy()/keV;
-		if(IronBoxInitialE>5000){
+	/*	if(IronBoxInitialE>5000){
 		 G4cout << "IRON incident E       "<< IronBoxInitialE <<  "		particleName     "<<particleName << G4endl;
-		}
+		}*/
             fEventAction->SetIRONBOX_iEDep(IronBoxInitialE);
         }
         
@@ -469,6 +520,25 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         edepLEPS_HPGeCrystal = aStep->GetTotalEnergyDeposit()/keV;
         
         fEventAction->AddEnergyLEPS_HPGeCrystals(LEPSNo, LEPS_HPGeCrystalNo, iTS, edepLEPS_HPGeCrystal);
+        
+    }
+    
+    
+    ////////////////////////////////////////////////
+    //              NAIS DETECTOR ARRAY
+    ////////////////////////////////////////////////
+    
+    
+    if((interactiontime < NAIS_TotalSampledTime) && (volumeName == "NAISNaICrystal"))
+    {
+        channelID = volume->GetCopyNo();
+        
+        NAISNo = channelID;
+        
+        iTS = interactiontime/NAIS_SamplingTime;
+        edepNAIS_NaICrystal = aStep->GetTotalEnergyDeposit()/keV;
+        
+        fEventAction->AddEnergyNAIS_NaICrystals(NAISNo, iTS, edepNAIS_NaICrystal);
         
     }
     

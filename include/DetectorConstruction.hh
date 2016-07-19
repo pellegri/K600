@@ -101,6 +101,9 @@ const G4int     numberOf_PADDLE = 3;
 ///////////////     LEPS DETECTORS     ///////////////////
 const G4int     numberOf_LEPS = 8;
 
+///////////////     NAIS DETECTORS     ///////////////////
+const G4int     numberOf_NAIS = 5;
+
 ///////////////     FLATSIDE CHAMBER     ///////////////////
 const G4int     numberOf_FLATSIDE = 2;
 
@@ -298,6 +301,27 @@ private:
     G4VPhysicalVolume*  Physical_LEPS_HPGeCrystal;
     G4Transform3D       LEPS_HPGeCrystal_transform[4];
     G4RotationMatrix    LEPS_HPGeCrystal_rotm[4];
+    
+    /////////////////////////////////////
+    //          NAIS DETECTORS
+    /////////////////////////////////////
+    
+    G4bool              NAIS_AllPresent_Override;
+    G4bool              NAIS_AllAbsent_Override;
+    G4bool              NAIS_Presence[numberOf_NAIS];
+    G4double            NAIS_Distance[numberOf_NAIS];
+    G4RotationMatrix    NAIS_rotm[numberOf_NAIS];
+    G4double            NAIS_phi[numberOf_NAIS];
+    G4double            NAIS_theta[numberOf_NAIS];
+    
+    G4Transform3D       NAIS_transform[numberOf_NAIS];
+    G4ThreeVector       NAIS_position[numberOf_NAIS];
+    
+    
+    //      NAIS NaI Crystals
+    G4VPhysicalVolume*  PhysiNAIS_NaICrystal;
+
+
 
     /////////////////////////////////////
     //       FLATSIDE CHAMBER

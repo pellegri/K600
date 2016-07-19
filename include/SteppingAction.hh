@@ -110,7 +110,11 @@ private:
     G4double    edepLEPS_HPGeCrystal;
     G4int       LEPSNo;
     G4int       LEPS_HPGeCrystalNo;
-    
+
+    ////    NAIS DETECTOR
+    G4double    edepNAIS_NaICrystal;
+    G4int       NAISNo;
+
 
     ////    PARAFFIN BOX
     G4double    edepParaffinBox;

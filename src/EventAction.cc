@@ -66,7 +66,9 @@ OffsetCLOVER(0.0),
 GainPADDLE(0),
 OffsetPADDLE(0),
 GainLEPS(1.0),
-OffsetLEPS(0.0)
+OffsetLEPS(0.0),
+GainNAIS(1.0),
+OffsetNAIS(0.0)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -172,6 +174,15 @@ void EventAction::BeginOfEventAction(const G4Event* evt)
             {
                 LEPS_HPGeCrystal_EDep[i][j][k] = 0;
             }
+        }
+    }
+
+    for(G4int i=0; i<5; i++)
+    {
+        for(G4int k=0; k<NAIS_TotalTimeSamples; k++)
+        {
+            NAIS_EDep[i][k] = 0.;
+            
         }
     }
     
@@ -561,7 +572,51 @@ void EventAction::EndOfEventAction(const G4Event* event)
     }
      
     if(eventTriggered_LEPS) analysisManager->AddNtupleRow(0);
+
+    ////////////////////////////////////////////////////
+    //
+    //              NAIS DETECTOR ARRAY
+    //
+    ////////////////////////////////////////////////////
     
+    GainNAIS = 1.0;
+    OffsetNAIS = 0.0;
+    bool eventTriggered_NAIS = false;
+    
+    for(G4int i=0; i<5; i++)
+    {
+        for(G4int k=0; k<NAIS_TotalTimeSamples; k++)
+        {
+
+                if(G4RandGauss::shoot(NAIS_EDep[i][k], 0.7) >= NAIS_NaICrystal_ThresholdEnergy)
+                {
+                    NAIS_EDep[i][k] = abs(G4RandGauss::shoot(NAIS_EDep[i][k], 1.7));
+                    //    cout << "LEPS_HPGeCrystal_EDep[i][j][k]    " << LEPS_HPGeCrystal_EDep[i][j][k]<< "  i  j  k  " << i <<"   "<< j << "   " << k<< endl;
+                    
+                    
+
+                }
+                
+                //        cout << "LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "  i  j  k  " << i << "   " << k<< endl;
+        
+            
+            
+            //    cout << "Activate_LEPS_ADDBACK    " << Activate_LEPS_ADDBACK << "LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "i  k  " << i <<"   "<< k << "LEPS_HPGeCrystal_ThresholdEnergy   " << LEPS_HPGeCrystal_ThresholdEnergy<< endl;
+            if(NAIS_EDep[i][k] >= NAIS_NaICrystal_ThresholdEnergy)
+            {
+                analysisManager->FillNtupleIColumn(0, i, 1);
+                analysisManager->FillNtupleDColumn(0, i+5, GainNAIS*NAIS_EDep[i][k] + OffsetNAIS);
+                eventTriggered_NAIS = true;
+                
+                //   cout << "++++++++++++++++++Activate_LEPS_ADDBACK    " << Activate_LEPS_ADDBACK << "   LEPS_EDep[i][k]   " << LEPS_EDep[i][k] << "   i  k  " << i <<"   "<< k << "    LEPS_HPGeCrystal_ThresholdEnergy   " << LEPS_HPGeCrystal_ThresholdEnergy<< "    eventTriggered_LEPS   " << eventTriggered_LEPS << endl;
+                
+                
+                
+            }
+        }
+    }
+    
+    if(eventTriggered_NAIS) analysisManager->AddNtupleRow(0);
     
     /*
     //analysisManager->FillNtupleIColumn(0, 0, 100);

@@ -81,7 +81,7 @@ int main(int argc,char** argv)
     G4String macro;
     G4String session;
 #ifdef G4MULTITHREADED
-    G4int nThreads = 4;
+    G4int nThreads = 2;
 #endif
   /*
     for ( G4int i=1; i<argc; i=i+2 ) {
@@ -113,7 +113,7 @@ int main(int argc,char** argv)
     //
 #ifdef G4MULTITHREADED
     G4MTRunManager * runManager = new G4MTRunManager;
-    runManager->SetNumberOfThreads(1);
+    runManager->SetNumberOfThreads(2);
     
     /*
      if ( nThreads > 0 ) {
@@ -140,8 +140,8 @@ int main(int argc,char** argv)
     
     G4PhysListFactory factory;
     G4VModularPhysicsList* phys = 0;
-    //G4String physName = "QGSP_BERT";
-    G4String physName = "QGSP_BERT_HP";
+    G4String physName = "QGSP_BERT";
+  //  G4String physName = "QGSP_BERT_HP";
     // reference PhysicsList via its name
     phys = factory.GetReferencePhysList(physName);
     phys->RegisterPhysics(new G4RadioactiveDecayPhysics());

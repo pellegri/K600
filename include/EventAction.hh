@@ -101,6 +101,12 @@ const G4double      LEPS_SamplingTime = 10; // ns
 const G4int         LEPS_TotalTimeSamples = 10; //
 const G4double      LEPS_TotalSampledTime = LEPS_SamplingTime * LEPS_TotalTimeSamples; // ns
 
+///////////////     NAIS Detectors - PIXIE16 Sampling     ///////////////////
+
+const G4double      NAIS_SamplingTime = 10; // ns
+const G4int         NAIS_TotalTimeSamples = 10; //
+const G4double      NAIS_TotalSampledTime = NAIS_SamplingTime * NAIS_TotalTimeSamples; // ns
+
 ///////////////     VDC Signal Wires - Energy Threshold     ///////////////////
 const G4double      VDC1_U_WIRE_ThresholdEnergy = 10.;   // keV
 const G4double      VDC1_X_WIRE_ThresholdEnergy = 10.;   // keV
@@ -119,6 +125,9 @@ const G4double      CLOVER_BGO_ThresholdEnergy = 5.;  //keV
 
 ///////////////     LEPS - Energy Threshold     ///////////////////
 const G4double      LEPS_HPGeCrystal_ThresholdEnergy = 6.;   // keV
+
+///////////////     NAIS - Energy Threshold     ///////////////////
+const G4double      NAIS_NaICrystal_ThresholdEnergy = 6.;   // keV
 
 ///////////////     PADDLE, Plastic Scintillators - Energy Threshold     ///////////////////
 const G4double      PADDLE_ThresholdEnergy = 0.5;  //  MeV
@@ -235,7 +244,18 @@ public:
     G4double    LEPS_EDep[8][LEPS_TotalTimeSamples];
     
     void AddEnergyLEPS_HPGeCrystals(G4int i, G4int j, G4int k, G4double a)	{LEPS_HPGeCrystal_EDep[i][j][k] += a; };
+
     
+    ////////////////////////
+    //      NAIS
+    G4double GainNAIS;
+    G4double OffsetNAIS;
+    // Previous versions, moved declaration to EventAction.cc constructor
+    //G4double GainLEPS = 1.0;
+    //G4double OffsetLEPS = 0.0;
+    
+    G4double    NAIS_EDep[8][NAIS_TotalTimeSamples];
+    void AddEnergyNAIS_NaICrystals(G4int i, G4int k, G4double a)	{NAIS_EDep[i][k] += a; };
     
     /////////////////////////////////////////
     //          PADDLE DETECTORS

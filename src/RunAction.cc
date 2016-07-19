@@ -114,7 +114,7 @@ RunAction::RunAction()
     G4cout << "CreateNtuple" << G4endl;
     
     ////    CLOVER Detectors
-    analysisManager->CreateNtupleIColumn(0, "CLOVER1_trig");
+/*    analysisManager->CreateNtupleIColumn(0, "CLOVER1_trig");
     analysisManager->CreateNtupleIColumn(0, "CLOVER2_trig");
     analysisManager->CreateNtupleIColumn(0, "CLOVER3_trig");
     analysisManager->CreateNtupleIColumn(0, "CLOVER4_trig");
@@ -151,7 +151,7 @@ RunAction::RunAction()
     analysisManager->CreateNtupleIColumn(0, "IRON_trig");
     analysisManager->CreateNtupleDColumn(0, "IRON_Energy");
     analysisManager->CreateNtupleDColumn(0, "IRON_iEnergy");
-   
+ */
     /*
     ////    VDC Detectors
     analysisManager->CreateNtupleDColumn(0, "VDC1_Xpos");
@@ -209,6 +209,28 @@ RunAction::RunAction()
     analysisManager->CreateNtupleDColumn(0, "LEPS7_Energy");
     analysisManager->CreateNtupleDColumn(0, "LEPS8_Energy");
     */
+    
+
+     ////    NAIS Detectors
+     analysisManager->CreateNtupleIColumn(0, "NAIS1_trig");
+     analysisManager->CreateNtupleIColumn(0, "NAIS2_trig");
+     analysisManager->CreateNtupleIColumn(0, "NAIS3_trig");
+     analysisManager->CreateNtupleIColumn(0, "NAIS4_trig");
+     analysisManager->CreateNtupleIColumn(0, "NAIS5_trig");
+    
+    /* analysisManager->CreateNtupleIColumn(0, "NAIS1_CrystalNo");
+     analysisManager->CreateNtupleIColumn(0, "NAIS2_CrystalNo");
+     analysisManager->CreateNtupleIColumn(0, "NAIS3_CrystalNo");
+     analysisManager->CreateNtupleIColumn(0, "NAIS4_CrystalNo");
+     analysisManager->CreateNtupleIColumn(0, "NAIS5_CrystalNo");
+*/
+     analysisManager->CreateNtupleDColumn(0, "NAIS1_Energy");
+     analysisManager->CreateNtupleDColumn(0, "NAIS2_Energy");
+     analysisManager->CreateNtupleDColumn(0, "NAIS3_Energy");
+     analysisManager->CreateNtupleDColumn(0, "NAIS4_Energy");
+     analysisManager->CreateNtupleDColumn(0, "NAIS5_Energy");
+
+    
     
     ////    TIARA Detectors
     //analysisManager->CreateNtupleIColumn(0, "TIARANo");
